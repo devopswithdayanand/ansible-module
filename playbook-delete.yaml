@@ -1,0 +1,10 @@
+---
+- name: Update web servers
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Ensure apache is at the latest version
+    dnf:
+      name: nginx-core
+      state: absent
