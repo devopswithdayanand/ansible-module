@@ -1,0 +1,21 @@
+---
+- name: Update web servers
+  hosts: group1
+  become: yes
+
+  tasks:
+  - name: Ensure apache is at the latest version
+    dnf:
+      name: nginx
+      state: latest
+  - name: Start service httpd, if not started
+    service:
+      name: nginx
+      state: started
+  - name: Copy file with owner and permissions
+    copy:
+      src: ./app/.
+      dest: /usr/share/nginx/html/
+      owner: ec2-user
+      group: ec2-user
+      mode: '644'
